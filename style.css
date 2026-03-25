@@ -1,0 +1,9 @@
+:Flores_Amarillas {
+position: absolute;
+font-family: "Eres la mejor amiga del munod Sara";
+top: 20px;
+transform: translateX(-50%);
+--petal-gradient: #ff8c00;
+--petal-gradient: #ffd700;
+--petal-gradient: #ffff00;
+}
