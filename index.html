@@ -3,47 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Feliz Día de las Flores Amarillas Ñaña - Te Quiero Mucho</title>
+    <title>Feliz Día de las Flores Amarillas</title>
     <style>
         body { margin:0; overflow:hidden; font-family:'Poppins', sans-serif; color:#fff; }
         canvas { display:block; }
-        
+
         .greeting {
             position: absolute; top: 30px; left: 0; right: 0; text-align: center;
-            pointer-events: none; z-index: 20; font-size: 2.5rem; font-weight: 800;
-            text-shadow: 0 0 20px rgba(0,0,0,0.6), 0 0 10px #ffaa33;
+            pointer-events: none; z-index: 20; font-size: 2.4rem; font-weight: 800;
+            text-shadow: 0 0 20px rgba(0,0,0,0.6);
             background: linear-gradient(135deg, #FFE55C, #FFB347);
             -webkit-background-clip: text; background-clip: text; color: transparent;
-            animation: fadeInDown 1s ease-out;
         }
-        .greeting small { font-size: 1.1rem; display:block; color:#FFDE7A; margin-top:5px; }
+        .greeting small { font-size: 1.1rem; display:block; color:#FFDE7A; margin-top:8px; }
 
-        /* Texto que aparece al tocar flores */
         #flowerMessage {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 2.2rem; font-weight: 700; text-align: center; line-height: 1.3;
-            padding: 25px 40px; border-radius: 20px; background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(8px); box-shadow: 0 0 30px rgba(255, 200, 80, 0.6);
-            pointer-events: none; z-index: 100; opacity: 0; transition: opacity 0.6s;
-            max-width: 85%; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            font-size: 2.3rem; font-weight: 700; text-align: center; line-height: 1.35;
+            padding: 30px 45px; border-radius: 25px; 
+            background: rgba(0,0,0,0.68); backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(255,190,60,0.5);
+            pointer-events: none; z-index: 100; opacity: 0; 
+            transition: opacity 0.8s ease; max-width: 90%;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.9);
         }
-
-        @keyframes fadeInDown { from { opacity:0; transform:translateY(-40px); } to { opacity:1; transform:translateY(0); } }
     </style>
 </head>
 <body>
+
     <div class="greeting">
         🌻 Feliz Día de las Flores Amarillas 🌻
-        <small>✨ Para mi mejor amigo Ñaña ✨</small>
+        <small>Para mi mejor amiga mi Ñaña 💛</small>
     </div>
 
     <div id="flowerMessage"></div>
 
-    <div class="badge-control" style="position:absolute;bottom:20px;left:20px;background:rgba(0,0,0,0.5);padding:6px 16px;border-radius:40px;font-size:0.7rem;color:#FFD966;border:1px solid #FFD96680;pointer-events:none;">🌀 Galaxia de Girasoles</div>
-    <div class="control-hint" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.5);padding:5px 12px;border-radius:30px;font-size:0.7rem;pointer-events:none;color:#FFE0A3;">🖱️ Click en las flores para ver mensajes especiales</div>
+    <div style="position:absolute; bottom:20px; left:20px; background:rgba(0,0,0,0.5); padding:8px 18px; border-radius:40px; font-size:0.75rem; color:#FFD966; pointer-events:none; border:1px solid #FFD96680;">
+        🌀 Galaxia de Girasoles
+    </div>
+    <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.5); padding:6px 14px; border-radius:30px; font-size:0.75rem; color:#FFE0A3; pointer-events:none;">
+        Haz click solo sobre los girasoles grandes 🌼
+    </div>
 
     <script type="importmap">
-        { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/" } }
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+            }
+        }
     </script>
 
     <script type="module">
@@ -53,7 +61,6 @@
         import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-        // === ESCENA ===
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x020210);
         scene.fog = new THREE.FogExp2(0x020210, 0.00045);
@@ -65,51 +72,50 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.toneMapping = THREE.ReinhardToneMapping;
-        renderer.toneMappingExposure = 1.1;
+        renderer.toneMappingExposure = 1.05;
         document.body.appendChild(renderer.domElement);
 
-        // Post-procesado con bloom más suave
         const composer = new EffectComposer(renderer);
         composer.addPass(new RenderPass(scene, camera));
-        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.9, 0.3, 0.85);
-        bloomPass.threshold = 0.12;
-        bloomPass.strength = 0.65;   // bajado
-        bloomPass.radius = 0.55;
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.85, 0.3, 0.9);
+        bloomPass.threshold = 0.15;
+        bloomPass.strength = 0.60;
+        bloomPass.radius = 0.5;
         composer.addPass(bloomPass);
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.06;
+        controls.dampingFactor = 0.07;
         controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.65;
+        controls.autoRotateSpeed = 0.6;
         controls.target.set(0, 0.5, 0);
 
-        // === MENSAJES PARA TU MEJOR AMIGO ===
+        // ==================== MENSAJES ====================
         const mensajes = [
-            "¡Feliz Día de las Flores Amarillas,\nmi mejor amigo Ñaña! 🌼\nTe quiero mucho",
-            "Gracias por iluminar mi vida\ncomo estas flores amarillas 💛",
-            "La amistad más bonita merece\nun ramo eterno de girasoles 🌻",
-            "Cada pétalo amarillo es un\n'gracias' por ser mi ñaña ❤️",
-            "Por muchos 21 de septiembre\njuntos, mi persona favorita ✨",
-            "Eres mi rayo de sol en forma de\nflor amarilla ☀️🌼",
-            "Te mando este jardín entero\nporque te lo mereces todo 💛"
+            "¡Feliz Día de las Flores Amarillas,\neres mejor amiga! 🌼\nTe quiero mucho",
+            "Gracias por iluminar mis días\ncomo estas flores amarillas 💛",
+            "Cada pétalo amarillo es un 'gracias'\npor ser mi mejor amiga ❤️",
+            "Por muchos años más de amistad\ny girasoles juntos 🌻",
+            "Eres mi rayo de sol favorito\n¡Feliz día de las flores! ☀️",
+            "Te mando este jardín entero\nporque te lo mereces todo 💛",
+            "Ñaña, gracias por existir y por\nser tan especial 🌼"
         ];
 
-        let currentMessageTimeout = null;
         const messageDiv = document.getElementById('flowerMessage');
+        let timeoutId = null;
 
         function showMessage() {
             const msg = mensajes[Math.floor(Math.random() * mensajes.length)];
             messageDiv.innerHTML = msg.replace(/\n/g, '<br>');
             messageDiv.style.opacity = '1';
 
-            if (currentMessageTimeout) clearTimeout(currentMessageTimeout);
-            currentMessageTimeout = setTimeout(() => {
+            if (timeoutId) clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
                 messageDiv.style.opacity = '0';
-            }, 4500);
+            }, 4800);
         }
 
-        // Raycaster para detectar clicks en flores
+        // ==================== RAYCASTER (SOLO GIRASOLES) ====================
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
 
@@ -118,84 +124,65 @@
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
             raycaster.setFromCamera(mouse, camera);
-            raycaster.params.Points.threshold = 0.35;   // para que sea más fácil tocar las flores pequeñas
 
-            // Detectar flores de la galaxia (points)
-            const intersectsPoints = raycaster.intersectObject(flowerPoints);
-            if (intersectsPoints.length > 0) {
-                showMessage();
-                return;
-            }
-
-            // Detectar girasoles 3D
-            const intersectsSunflowers = raycaster.intersectObjects(sunflowersGroup.children, true);
-            if (intersectsSunflowers.length > 0) {
+            // SOLO detecta los girasoles grandes (no los puntos de la galaxia)
+            const intersects = raycaster.intersectObjects(sunflowersGroup.children, true);
+            if (intersects.length > 0) {
                 showMessage();
             }
         }
         window.addEventListener('click', onClick);
 
-        // ========== FLORES GALAXIA (pétalos más suaves) ==========
+        // ==================== GALAXIA DE PUNTOS (flores pequeñas - sin interacción) ====================
         function createFlowerTexture(type) {
             const canvas = document.createElement('canvas');
             canvas.width = 128; canvas.height = 128;
             const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, 128, 128);
             const cx = 64, cy = 64;
 
-            // Colores más suaves y menos brillantes
-            let petalColor = type === 0 ? '#FFDD77' : type === 1 ? '#FFCC66' : '#FFBB55';
+            const petalColor = type === 0 ? '#FFDB88' : type === 1 ? '#FFCC77' : '#FFBB66';
 
             if (type === 0) {
                 for (let i = 0; i < 6; i++) {
-                    const angle = (i / 6) * Math.PI * 2;
+                    const a = (i/6)*Math.PI*2;
                     ctx.save();
-                    ctx.translate(cx + Math.cos(angle)*32, cy + Math.sin(angle)*32);
-                    ctx.rotate(angle);
+                    ctx.translate(cx + Math.cos(a)*31, cy + Math.sin(a)*31);
+                    ctx.rotate(a);
                     ctx.fillStyle = petalColor;
                     ctx.beginPath();
-                    ctx.ellipse(0, 0, 21, 27, 0, 0, Math.PI*2);
+                    ctx.ellipse(0,0,20,26,0,0,Math.PI*2);
                     ctx.fill();
                     ctx.restore();
                 }
             } else if (type === 1) {
                 for (let i = 0; i < 8; i++) {
-                    const angle = (i / 8) * Math.PI * 2;
+                    const a = (i/8)*Math.PI*2;
                     ctx.save();
-                    ctx.translate(cx + Math.cos(angle)*37, cy + Math.sin(angle)*37);
-                    ctx.rotate(angle);
+                    ctx.translate(cx + Math.cos(a)*36, cy + Math.sin(a)*36);
+                    ctx.rotate(a);
                     ctx.fillStyle = petalColor;
                     ctx.beginPath();
-                    ctx.ellipse(0, 0, 15, 29, 0, 0, Math.PI*2);
+                    ctx.ellipse(0,0,15,28,0,0,Math.PI*2);
                     ctx.fill();
                     ctx.restore();
                 }
             } else {
                 for (let i = 0; i < 12; i++) {
-                    const angle = (i / 12) * Math.PI * 2;
+                    const a = (i/12)*Math.PI*2;
                     ctx.fillStyle = '#FFCC88';
                     ctx.beginPath();
-                    ctx.ellipse(cx + Math.cos(angle)*27, cy + Math.sin(angle)*27, 13, 17, angle, 0, Math.PI*2);
+                    ctx.ellipse(cx + Math.cos(a)*27, cy + Math.sin(a)*27, 13, 17, a, 0, Math.PI*2);
                     ctx.fill();
                 }
             }
 
-            // Centro más suave
-            ctx.beginPath();
-            ctx.arc(cx, cy, 15, 0, Math.PI*2);
-            ctx.fillStyle = '#E68A2E';
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(cx, cy, 9, 0, Math.PI*2);
-            ctx.fillStyle = '#C76A1F';
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(cx,cy,15,0,Math.PI*2); ctx.fillStyle = '#E68A2E'; ctx.fill();
+            ctx.beginPath(); ctx.arc(cx,cy,9,0,Math.PI*2); ctx.fillStyle = '#C76A1F'; ctx.fill();
 
             return new THREE.CanvasTexture(canvas);
         }
 
         const flowerTextures = [createFlowerTexture(0), createFlowerTexture(1), createFlowerTexture(2)];
-
-        // ... (el resto del código de la galaxia de puntos se mantiene igual, solo cambiamos los colores en el loop)
 
         const TOTAL_FLOWERS = 18500;
         const positions = new Float32Array(TOTAL_FLOWERS * 3);
@@ -210,8 +197,6 @@
         const outerRadius = 16.2;
 
         for (let i = 0; i < TOTAL_FLOWERS; i++) {
-            // ... (mismo cálculo de posición que tenías)
-
             let radius, angle, yOffset;
             const isCore = Math.random() < 0.2;
             if (isCore) {
@@ -239,16 +224,14 @@
             positions[i*3+2] = z;
 
             const distFactor = Math.min(1, Math.sqrt(x*x + y*y + z*z) / 14);
-            let r = 1.0, g = 0.78 + Math.random()*0.18, b = 0.25 + Math.random()*0.25; // más suave
+            let r = 1.0, g = 0.78 + Math.random()*0.18, b = 0.25 + Math.random()*0.25;
             if (distFactor < 0.3) { g = 0.65; b = 0.15; }
             if (distFactor > 0.7) { g = 0.88; b = 0.38; }
 
             colors[i*3] = r; colors[i*3+1] = g; colors[i*3+2] = b;
-
-            let sizeVal = 0.28 + Math.random() * 0.48;
-            if (distFactor < 0.3) sizeVal *= 0.85;
-            if (distFactor > 0.8) sizeVal *= 1.2;
-            sizes[i] = sizeVal;
+            sizes[i] = 0.28 + Math.random() * 0.48;
+            if (distFactor < 0.3) sizes[i] *= 0.85;
+            if (distFactor > 0.8) sizes[i] *= 1.2;
             texIndices[i] = Math.floor(Math.random() * 3);
         }
 
@@ -258,26 +241,10 @@
         flowerGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
         flowerGeometry.setAttribute('texIndex', new THREE.BufferAttribute(texIndices, 1));
 
-        const vertexShader = `...` ; // (mismo que tenías)
-        const fragmentShader = `
-            uniform sampler2D uTextures[3];
-            varying vec3 vColor;
-            varying float vTexIndex;
-            void main() {
-                int idx = int(round(vTexIndex));
-                vec4 texColor;
-                if (idx == 0) texColor = texture2D(uTextures[0], gl_PointCoord);
-                else if (idx == 1) texColor = texture2D(uTextures[1], gl_PointCoord);
-                else texColor = texture2D(uTextures[2], gl_PointCoord);
-                if (texColor.a < 0.2) discard;
-                vec3 finalColor = vColor * texColor.rgb * 0.92;  // menos brillo
-                gl_FragColor = vec4(finalColor, texColor.a * 0.92);
-            }
-        `;
-
         const flowerMaterial = new THREE.ShaderMaterial({
             uniforms: { uTextures: { value: flowerTextures } },
-            vertexShader: `attribute float size; attribute vec3 color; attribute float texIndex;
+            vertexShader: `
+                attribute float size; attribute vec3 color; attribute float texIndex;
                 varying vec3 vColor; varying float vTexIndex;
                 void main() {
                     vColor = color; vTexIndex = texIndex;
@@ -285,8 +252,22 @@
                     gl_PointSize = size * (300.0 / (-mvPosition.z)) * 0.95;
                     gl_PointSize = clamp(gl_PointSize, 7.0, 48.0);
                     gl_Position = projectionMatrix * mvPosition;
-                }`,
-            fragmentShader: fragmentShader,
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D uTextures[3];
+                varying vec3 vColor; varying float vTexIndex;
+                void main() {
+                    int idx = int(round(vTexIndex));
+                    vec4 texColor;
+                    if (idx == 0) texColor = texture2D(uTextures[0], gl_PointCoord);
+                    else if (idx == 1) texColor = texture2D(uTextures[1], gl_PointCoord);
+                    else texColor = texture2D(uTextures[2], gl_PointCoord);
+                    if (texColor.a < 0.2) discard;
+                    vec3 finalColor = vColor * texColor.rgb * 0.92;
+                    gl_FragColor = vec4(finalColor, texColor.a * 0.92);
+                }
+            `,
             transparent: true,
             depthWrite: false,
             blending: THREE.AdditiveBlending
@@ -295,46 +276,63 @@
         const flowerPoints = new THREE.Points(flowerGeometry, flowerMaterial);
         scene.add(flowerPoints);
 
-        // ========== GIRASOLES 3D (pétalos menos brillantes) ==========
+        // ==================== GIRASOLES 3D ====================
+        const sunflowersGroup = new THREE.Group();
+
         function createSunflower(x, z, yOffset = 0, scaleFactor = 1.0) {
             const group = new THREE.Group();
 
-            // tallo y hojas iguales...
-            const stemGeo = new THREE.CylinderGeometry(0.12 * scaleFactor, 0.18 * scaleFactor, 1.1 * scaleFactor, 6);
-            const stemMat = new THREE.MeshStandardMaterial({ color: 0x5a9e4e, roughness: 0.6 });
-            const stem = new THREE.Mesh(stemGeo, stemMat);
+            // Tallo
+            const stem = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.12*scaleFactor, 0.18*scaleFactor, 1.1*scaleFactor, 6),
+                new THREE.MeshStandardMaterial({ color: 0x5a9e4e, roughness: 0.6 })
+            );
             stem.position.y = -0.55 * scaleFactor;
             group.add(stem);
 
-            // hojas...
+            // Hojas
             const leafMat = new THREE.MeshStandardMaterial({ color: 0x6ab04c });
             const leafGeo = new THREE.BoxGeometry(0.35*scaleFactor, 0.08*scaleFactor, 0.2*scaleFactor);
-            const leaf1 = new THREE.Mesh(leafGeo, leafMat); leaf1.position.set(0.25*scaleFactor, -0.3*scaleFactor, 0); leaf1.rotation.z = 0.5; group.add(leaf1);
-            const leaf2 = leaf1.clone(); leaf2.position.x *= -1; leaf2.rotation.z *= -1; group.add(leaf2);
+            const leaf1 = new THREE.Mesh(leafGeo, leafMat);
+            leaf1.position.set(0.25*scaleFactor, -0.3*scaleFactor, 0);
+            leaf1.rotation.z = 0.5;
+            group.add(leaf1);
+            const leaf2 = leaf1.clone();
+            leaf2.position.x *= -1;
+            leaf2.rotation.z *= -1;
+            group.add(leaf2);
 
-            // centro
-            const center = new THREE.Mesh(new THREE.SphereGeometry(0.28*scaleFactor,16,16),
-                new THREE.MeshStandardMaterial({ color: 0xb5651d, emissive: 0x7a3e0a, emissiveIntensity: 0.15 }));
+            // Centro
+            const center = new THREE.Mesh(
+                new THREE.SphereGeometry(0.28*scaleFactor, 16, 16),
+                new THREE.MeshStandardMaterial({ color: 0xb5651d, emissive: 0x7a3e0a, emissiveIntensity: 0.15 })
+            );
             center.position.y = 0.1 * scaleFactor;
             group.add(center);
 
-            // PÉTALOS con menos brillo
+            // Pétalos con brillo bajado
             const petalMat = new THREE.MeshStandardMaterial({ 
                 color: 0xFFCC55, 
                 emissive: 0xFFAA22, 
-                emissiveIntensity: 0.12   // bajado
+                emissiveIntensity: 0.12 
             });
 
             for (let i = 0; i < 14; i++) {
                 const angle = (i / 14) * Math.PI * 2;
-                const petal = new THREE.Mesh(new THREE.CylinderGeometry(0.22*scaleFactor, 0.24*scaleFactor, 0.6*scaleFactor, 5), petalMat);
+                const petal = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.22*scaleFactor, 0.24*scaleFactor, 0.6*scaleFactor, 5),
+                    petalMat
+                );
                 petal.position.set(Math.cos(angle)*0.48*scaleFactor, 0.05*scaleFactor, Math.sin(angle)*0.48*scaleFactor);
                 petal.rotation.set(0.4, 0, angle);
                 group.add(petal);
             }
             for (let i = 0; i < 10; i++) {
                 const angle = (i / 10) * Math.PI * 2 + 0.3;
-                const petal = new THREE.Mesh(new THREE.CylinderGeometry(0.16*scaleFactor, 0.18*scaleFactor, 0.5*scaleFactor, 5), petalMat);
+                const petal = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.16*scaleFactor, 0.18*scaleFactor, 0.5*scaleFactor, 5),
+                    petalMat
+                );
                 petal.position.set(Math.cos(angle)*0.62*scaleFactor, 0.02*scaleFactor, Math.sin(angle)*0.62*scaleFactor);
                 petal.rotation.set(0.3, 0, angle);
                 group.add(petal);
@@ -345,25 +343,58 @@
             return group;
         }
 
-        // (el resto del código de posiciones de girasoles, polen, estrellas, etc. se mantiene igual que tenías)
+        // Posiciones de girasoles
+        const sunflowerPositions = [];
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2;
+            const radius = 1.8 + Math.random() * 1.2;
+            const x = Math.cos(angle) * radius;
+            const z = Math.sin(angle) * radius;
+            sunflowerPositions.push({ x, z, y: -0.2 + Math.random() * 0.5, scale: 0.9 + Math.random() * 0.3 });
+        }
+        const armAngles = [0, Math.PI/2, Math.PI, 3*Math.PI/2];
+        for (let a = 0; a < armAngles.length; a++) {
+            for (let r = 3.5; r <= 12; r += 2.2) {
+                const angleOffset = armAngles[a];
+                const spiralBase = 2.6 * Math.log(r + 0.8);
+                const angle = spiralBase + angleOffset + (Math.random() - 0.5) * 0.8;
+                const x = Math.cos(angle) * r;
+                const z = Math.sin(angle) * r;
+                const y = Math.sin(r * 1.2) * 0.4 + (Math.random() - 0.5) * 0.4;
+                sunflowerPositions.push({ x, z, y: y - 0.1, scale: 0.8 + Math.random() * 0.5 });
+            }
+        }
+        for (let i = 0; i < 12; i++) {
+            const rad = 6 + Math.random() * 7;
+            const ang = Math.random() * Math.PI * 2;
+            const x = Math.cos(ang) * rad;
+            const z = Math.sin(ang) * rad;
+            const y = (Math.random() - 0.5) * 1.2;
+            sunflowerPositions.push({ x, z, y, scale: 0.7 + Math.random() * 0.6 });
+        }
 
-        // ... [pega aquí todo el código que tenías desde "const sunflowerPositions = [];" hasta el final de la creación de sunflowersGroup, pollen, stars, dust, coreGlow, halo, luces, etc.]
+        sunflowerPositions.forEach(pos => {
+            const sunflower = createSunflower(pos.x, pos.z, pos.y, pos.scale);
+            sunflowersGroup.add(sunflower);
+        });
+        scene.add(sunflowersGroup);
 
-        // (Para no hacer el mensaje demasiado largo, asumo que copias el resto tal cual. Solo asegúrate de declarar "sunflowersGroup" antes del animate)
-
+        // ==================== ANIMACIÓN ====================
         let time = 0;
         function animate() {
             requestAnimationFrame(animate);
             time += 0.008;
 
-            // ... (tus animaciones existentes)
+            sunflowersGroup.children.forEach((sunflower, idx) => {
+                sunflower.rotation.z = Math.sin(time * 1.2 + idx) * 0.03;
+                sunflower.rotation.x = Math.cos(time * 1.0 + idx) * 0.02;
+            });
 
             controls.update();
             composer.render();
         }
         animate();
 
-        // Resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -371,7 +402,7 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        console.log('🌻 Galaxia lista con mensajes para tu mejor amigo');
+        console.log('🌼 Feliz Dia Atrasado Ñañita Yo Te Quiro Mucho Aunque Sea Molestoso');
     </script>
 </body>
 </html>
