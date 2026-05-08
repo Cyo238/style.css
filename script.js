@@ -20,13 +20,17 @@ function verificarDatos() {
     let resultado = "";
 
     // Búsqueda simple de palabras históricas
-    if (
-        texto.includes("Colón") ||
-        texto.includes("independencia") ||
-        texto.includes("Real Audiencia") ||
-        texto.includes("virreinato") ||
-        texto.includes("colonial")
-    ) {
+   if (
+    texto.toLowerCase().includes("colón") ||
+    texto.toLowerCase().includes("independencia") ||
+    texto.toLowerCase().includes("real audiencia") ||
+    texto.toLowerCase().includes("virreinato") ||
+    texto.toLowerCase().includes("colonial") ||
+    texto.toLowerCase().includes("colonia") ||
+    texto.toLowerCase().includes("conquista") ||
+    texto.toLowerCase().includes("imperio español") ||
+    texto.toLowerCase().includes("españa")
+) {
 
         resultado = `
             ✅ El texto contiene elementos relacionados
