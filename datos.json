@@ -1,0 +1,39 @@
+{
+  "proyecto": "IA Verificadora de Datos Históricos Coloniales",
+
+  "version": "1.0",
+
+  "autor": "Anderson Cayo",
+
+  "base_historica": [
+
+    {
+      "evento": "Llegada de Cristóbal Colón a América",
+      "fecha": 1492,
+      "categoria": "Colonización",
+      "descripcion": "Inicio del proceso de conquista y colonización española."
+    },
+
+    {
+      "evento": "Creación del Virreinato del Perú",
+      "fecha": 1542,
+      "categoria": "Virreinato",
+      "descripcion": "Organización política del Imperio Español en Sudamérica."
+    },
+
+    {
+      "evento": "Real Audiencia de Quito",
+      "fecha": 1563,
+      "categoria": "Administración Colonial",
+      "descripcion": "Institución política y judicial de la colonia."
+    },
+
+    {
+      "evento": "Independencia de Ecuador",
+      "fecha": 1822,
+      "categoria": "Independencia",
+      "descripcion": "Fin del dominio colonial español en el territorio ecuatoriano."
+    }
+
+  ]
+}
