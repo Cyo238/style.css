@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Verificadora de Datos Históricos Coloniales</title>
+
+    <!-- Conexión con CSS -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>IA Verificadora de Datos Históricos Coloniales</h1>
+        <p>
+            Sistema basado en Inteligencia Artificial para analizar
+            y verificar información histórica colonial.
+        </p>
+    </header>
+
+    <main>
+
+        <section class="contenedor">
+            
+            <h2>Ingresar Texto Histórico</h2>
+
+            <textarea 
+                id="textoHistorico"
+                placeholder="Escribe aquí el documento histórico..."
+            ></textarea>
+
+            <button onclick="verificarDatos()">
+                Verificar Información
+            </button>
+
+        </section>
+
+        <section class="resultado">
+
+            <h2>Resultado del Análisis</h2>
+
+            <div id="respuestaIA">
+                Esperando análisis...
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Proyecto educativo sobre IA aplicada a la Historia Colonial
+        </p>
+    </footer>
+
+    <!-- Conexión con JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
